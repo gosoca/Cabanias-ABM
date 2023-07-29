@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include "_modal.html" %}
+
+<h4>
+    <strong>Clientes ABM</strong>
+  </h4>
+  <p>esta es una produccion de Guasos DEV.</p>
+
+  <div class="row">
+    <div class="col-12 mb-3">
+      <button id="create-cliente-sync" class="btn btn-primary" type="button" name="button">
+        <span class="fa fa-plus mr-2"></span>Alta Cliente
+      </button>
+     
+      <button id="filter-cliente" class="filter-cliente btn btn-primary" type="button" name="button" data-form-url="{% url 'filter_cliente' %}">
+        <span class="fa fa-filter mr-2"></span>Filtrar Cliente
+      </button>
+    </div>
+    <div class="col-12 mb-3">
+    {% if 'type' in request.GET %}
+      <p class="filtered-cliente">Filtrado de Clientes.</p>
+    {% endif %}
+    {% include "clientes_tabla.html" %}
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+{% endblock content %}
+
+{% block extrascripts %}
+<script type="text/javascript">
+
+$(function () {
+    // Create cliente synchronous
+    function createClienteSyncModalForm() {
+      $("#create-cliente-sync").modalForm({
+          formURL: "{% url 'create_cliente' %}",
+          modalID: "#create-modal"
+      });
+    }
+    createClienteSyncModalForm();
+
+    
+
+    // Update cliente asynchronous button
+    // message
+    var asyncSuccessMessageUpdate = [
+      "<div ",
+      "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
+      "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
+      "Success: Cliente ha sido actualizado.",
+      "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
+      "<span aria-hidden='true'>&times;</span>",
+      "</button>",
+      "</div>",
+      "<script>",
+      "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
+      "<\/script>"
+    ].join("");
+
+    // modal form
+    function updateClienteModalForm() {
+      $(".update-cliente").each(function () {
+        $(this).modalForm({
+          formURL: $(this).data("form-url"),
+          asyncUpdate: true,
+          asyncSettings: {
+            closeOnSubmit: false,
+            successMessage: asyncSuccessMessageUpdate,
+            dataUrl: "cliente/",
+            dataElementId: "#clientes-table",
+            dataKey: "table",
+            addModalFormFunction: reinstantiateModalForms
+          }
+        });
+      });
+    }
+    updateClienteModalForm();
+
+    // Delete cliente buttons - formURL is retrieved from the data of the element
+    function deleteClienteModalForm() {
+      $(".delete-cliente").each(function () {
+          $(this).modalForm({formURL: $(this).data("form-url"), isDeleteForm: true});
+      });
+    }
+    deleteClienteModalForm();
+
+    // Read cliente buttons
+    function readClienteModalForm() {
+      $(".read-cliente").each(function () {
+          $(this).modalForm({formURL: $(this).data("form-url")});
+      });
+    }
+    readClienteModalForm();
+
+    function reinstantiateModalForms() {
+      createClienteSyncModalForm();
+      readClienteModalForm();
+      updateClienteModalForm();
+      deleteClienteModalForm();
+    }
+
+    // Filter clientes button
+    $("#filter-cliente").each(function () {
+        $(this).modalForm({formURL: $(this).data("form-url")});
+    });
+
+    // Hide message
+    $(".alert").fadeTo(2000, 500).slideUp(500, function () {
+        $(".alert").slideUp(500);
+    });
+  });
+</script>
+{% endblock extrascripts %}

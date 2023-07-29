@@ -1,0 +1,42 @@
+<table id="clientes-table" class="table">
+    <thead>
+    <tr>
+      <th class="text-center" scope="col">#</th>
+      <th class="text-center" scope="col">Nombre</th>
+      <th class="text-center" scope="col">Apellido</th>
+      <th class="text-center" scope="col">Año de nacim.</th>
+      <th class="text-center" scope="col">Email</th>
+      <th class="text-center" scope="col">Telefono</th>
+      <th class="text-center" scope="col">Genero</th>
+      <th class="text-center" scope="col">Read / Update / Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+      {% for cliente in clientes %}
+      <tr>
+        <th class="text-center" scope="row">{{ forloop.counter }}</th>
+        <td class="text-center">{{cliente.nombre }}</td>
+        <td class="text-center">{{cliente.apellido }}</td>
+        <td class="text-center">{{cliente.A_nacim }}</td>
+        <td class="text-center">{{cliente.email }}</td>
+        <td class="text-center">{{cliente.telefono }}</td>
+        <td class="text-center">{{cliente.genero_cliente }}</td>
+        <td class="text-center">
+          <!-- Read cliente buttons -->
+          <button type="button" class="read-cliente btn btn-sm btn-primary" data-form-url="{% url 'read_cliente' cliente.pk %}">
+            <span class="fa fa-eye"></span>
+          </button>
+          <!-- Update cliente buttons -->
+          <button type="button" class="update-cliente btn btn-sm btn-primary" data-form-url="{% url 'update_cliente' cliente.pk %}">
+            <span class="fa fa-pencil"></span>
+          </button>
+          <!-- Delete cliente buttons -->
+          <button type="button" class="delete-cliente btn btn-sm btn-danger" data-form-url="{% url 'delete_cliente' cliente.pk %}">
+            <span class="fa fa-trash"></span>
+          </button>
+        </td>
+      </tr>
+    {% endfor %}
+  
+    </tbody>
+  </table>
