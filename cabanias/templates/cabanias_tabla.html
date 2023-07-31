@@ -1,0 +1,38 @@
+<table id="cabanias-table" class="table">
+    <thead>
+    <tr>
+      <th class="text-center" scope="col">#</th>
+      <th class="text-center" scope="col">Nombre</th>
+      <th class="text-center" scope="col">pax</th>
+      <th class="text-center" scope="col">costo.</th>
+     
+      <th class="text-center" scope="col">Read / Update / Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+      {% for cab in cabanias %}
+      <tr>
+        <th class="text-center" scope="row">{{ forloop.counter }}</th>
+        <td class="text-center">{{cab.nombre }}</td>
+        <td class="text-center">{{cab.pax }}</td>
+        <td class="text-center">{{cab.costo }}</td>
+ 
+        <td class="text-center">
+          <!-- Read Cabanias buttons -->
+          <button type="button" class="read-cabania btn btn-sm btn-primary" data-form-url="{% url 'read_cabania' cabania.pk %}">
+            <span class="fa fa-eye"></span>
+          </button>
+          <!-- Update Cabanias buttons -->
+          <button type="button" class="update-cabania btn btn-sm btn-primary" data-form-url="{% url 'update_cabania' cabania.pk %}">
+            <span class="fa fa-pencil"></span>
+          </button>
+          <!-- Delete Cabanias buttons -->
+          <button type="button" class="delete-cabania btn btn-sm btn-danger" data-form-url="{% url 'delete_cabania' cabania.pk %}">
+            <span class="fa fa-trash"></span>
+          </button>
+        </td>
+      </tr>
+    {% endfor %}
+  
+    </tbody>
+  </table>

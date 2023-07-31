@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'examples',
     'tests',
     'clientes',
+    'cabanias',
 ]
 
 MIDDLEWARE = [
