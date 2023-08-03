@@ -15,12 +15,13 @@ class CabaniaFilterForm(BSModalForm):
 
 
 class CabaniaModelForm(BSModalModelForm):
-    A_nacim = forms.DateField(
-        error_messages={'invalid': 'Enter a valid date in YYYY-MM-DD format.'}
-    )
-
-    class Meta:
+   class Meta:
         model = Cabanias
         fields = '__all__'
+   """  A_nacim = forms.DateField(
+        error_messages={'invalid': 'Enter a valid date in YYYY-MM-DD format.'}
+    ) """
+
+    
 
 

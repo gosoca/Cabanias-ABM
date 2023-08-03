@@ -1,7 +1,7 @@
 {% load widget_tweaks %}
 
 <div class="modal-header">
-  <h3 class="modal-title">Detalle del Cliente</h3>
+  <h3 class="modal-title">Detalle del Cabaña</h3>
   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -15,25 +15,13 @@
   </div>
   <div class="">
     Apellido:
-    {{ object.apellido }}
+    {{ object.pax }}
   </div>
   <div class="">
-    Año de nacimiento:
-    {{ object.A_nacim }}
-    €
+    Precio
+    {{ object.costo }}
   </div>
-  <div class="">
-    Email:
-    {{ object.email }}
-  </div>
-  <div class="">
-    Telefono:
-    {{ object.telefono }}
-  </div>
-  <div class="">
-    genero_cliente:
-    {{ object.genero_cliente }}
-  </div>
+ 
 </div>
 
 <div class="modal-footer">
