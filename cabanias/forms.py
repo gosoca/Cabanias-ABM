@@ -8,7 +8,7 @@ from .models import Cabanias
 
 
 class CabaniaFilterForm(BSModalForm):
-    type = forms.ChoiceField(choices=Cabanias.nombre)
+ #   type = forms.ChoiceField(choices=Cabanias.nombre)
 
     class Meta:
         fields = ['type']
